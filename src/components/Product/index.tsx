@@ -10,6 +10,7 @@ export type ProductProps = {
 
 const Product = ({ id, name, price, picture }: ProductProps) => (
   <Wrapper>
+
     <img src={picture} alt={`Imagem de referência ${name}`} />
 
     <Info>
