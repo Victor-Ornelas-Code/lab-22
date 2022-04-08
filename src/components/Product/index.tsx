@@ -6,9 +6,10 @@ export type ProductProps = {
   name: string;
   price: number;
   picture: string;
+  quantity: number;
 };
 
-const Product = ({ id, name, price, picture }: ProductProps) => (
+const Product = ({ id, name, price, picture, quantity }: ProductProps) => (
   <Wrapper>
 
     <img src={picture} alt={`Imagem de referência ${name}`} />
@@ -20,7 +21,7 @@ const Product = ({ id, name, price, picture }: ProductProps) => (
       </Column>
 
       <WrapperIncrementor>
-        <Incrementor id={id} quantity={1} />
+        <Incrementor id={id} quantity={quantity} />
       </WrapperIncrementor>
     </Info>
   </Wrapper>

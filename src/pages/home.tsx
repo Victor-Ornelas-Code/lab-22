@@ -28,7 +28,8 @@ const Home = () => {
             id={product.id}
             picture={product.picture}
             name={product.name}
-            price={product.price} />)}
+            price={product.price}
+            quantity={product.quantity} />)}
         <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
       </Container>
     </>
