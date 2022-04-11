@@ -5,19 +5,22 @@ import Cart from "../components/Cart";
 import { Container } from "../components/Container";
 import Header from "../components/Header";
 import Product, { ProductProps } from "../components/Product";
+import { useProducts } from "../Data/data";
+
 
 
 const Home = () => {
-  const [products, setProducts] = useState<ProductProps[]>([]);
+  const {products, setProducts} = useProducts();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const pegarData = async () => {
-      const response = await axios.get('http://localhost:3001/products')
-      setProducts(response.data)
-    }
-    pegarData()
+    setProducts()
   }, [])
+
+//  const products = useGetData((state) => state.setProducts);
+//  const victor = products(["oi"])
+//  console.log(useGetData((state) => state.products))
+ 
 
   return (
     <>
@@ -25,11 +28,7 @@ const Home = () => {
       <Container>
         {products.map(product =>
           <Product
-            id={product.id}
-            picture={product.picture}
-            name={product.name}
-            price={product.price}
-            quantity={product.quantity} />)}
+            key={product.id} {...product}/>)}
         <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
       </Container>
     </>
