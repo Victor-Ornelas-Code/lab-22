@@ -5,7 +5,7 @@ import Button from "../Button";
 import Typography from "../Typography";
 
 import { Wrapper, Subtotal, Header } from "./styles";
-import { useCart } from "../../Data/data";
+import { useCart } from "../../context/globalState";
 import Product from "../Product";
 
 export type MenuPaymentProps = {
@@ -14,24 +14,15 @@ export type MenuPaymentProps = {
 };
 
 
-
-/**
- * Adicionar itens ao carrinho, design ao seu critério mas deve conter:
- * - Nome do produto
- * - Imagem
- * - Preço
- * - Incrementador
- */
-
 const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
-  const { cart, setCart } = useCart();
+  const { cart } = useCart();
 
   const valueTotal = () => {
     let total: number = 0;
     cart.forEach((product) => {
-      total = total + (product.quantityCart! * product.price)
+      total = total + (product.quantityBuy * product.price)
     })
-    return total.toLocaleString('pt-br' , {style: 'currency', currency: 'BRL'})
+    return total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
   }
 
   return (
@@ -42,7 +33,7 @@ const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
         </Typography>
         <CloseOutline onClick={() => setIsOpen(false)} />
       </Header>
-      {cart.map((product) => product.quantityCart! > 0 &&
+      {cart.map((product) => product.quantityBuy > 0 &&
         <Product
           key={product.id} {...product} />)}
 

@@ -1,11 +1,9 @@
-
-import axios from "axios";
 import { useEffect, useState } from "react";
 import Cart from "../components/Cart";
 import { Container } from "../components/Container";
 import Header from "../components/Header";
-import Product, { ProductProps } from "../components/Product";
-import { useProducts } from "../Data/data";
+import Product from "../components/Product";
+import { useProducts } from "../context/globalState";
 
 
 
@@ -15,12 +13,7 @@ const Home = () => {
 
   useEffect(() => {
     setProducts()
-  }, [])
-
-//  const products = useGetData((state) => state.setProducts);
-//  const victor = products(["oi"])
-//  console.log(useGetData((state) => state.products))
- 
+  }, []) 
 
   return (
     <>

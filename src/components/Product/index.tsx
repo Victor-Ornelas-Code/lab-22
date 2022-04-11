@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useCart, useProducts } from "../../Data/data";
+import { useCart, useProducts } from "../../context/globalState";
 import Incrementor from "../Incrementor";
 import { Wrapper, Info, Column, Text, WrapperIncrementor } from "./styles";
 
@@ -8,42 +7,42 @@ export type ProductProps = {
   name: string;
   price: number;
   picture: string;
-  quantity?: number;
-  quantityCart?: number;
+  quantity: number;
+  quantityBuy: number;
 };
 
-const Product = ({ id, name, price, picture, quantityCart}: ProductProps) => {
-  const {cart , setCart} = useCart();
-  const {products, setProductInicial} = useProducts();
+const Product = ({ id, name, price, picture, quantityBuy: quantityBuy }: ProductProps) => {
+  const { cart, setCart } = useCart();
+  const { products, setProductList: setProductInicial } = useProducts();
 
-  const handleIncrement = (quantityCart: number) => {
+  const handleIncrement = (quantityBuy: number, quantity: number) => {
     const product = products.find((product) => product.id === id);
-    if(product!.quantity! >= product!.quantityCart! + 1){
-      if(cart.length > 0){
+    if (product!.quantity >= product!.quantityBuy + 1) {
+      if (cart.length > 0) {
         const product = cart.find((item) => item.id === id)
 
-        if(product){
-          product.quantityCart = product.quantityCart! + 1;
-        } else{
-          setCart(id, name, price, picture, 1);
+        if (product) {
+          product.quantityBuy = product.quantityBuy + 1;
+        } else {
+          setCart(id, name, price, picture, 1, quantity);
         }
-      } else{
-        setCart(id, name, price, picture, quantityCart)
+      } else {
+        setCart(id, name, price, picture, quantityBuy, quantity)
       }
       updateProductList('increment')
     }
   }
 
-  const handleDecrement = (quantityCart: number) => {
-    const product = products.find((product) => product.id === id)!.quantityCart;
+  const handleDecrement = (quantityBuy: number , quantity: number) => {
+    const product = products.find((product) => product.id === id)!.quantityBuy;
 
-    if(product! - 1 >= 0){
+    if (product - 1 >= 0) {
       const product = cart.find((product) => product.id === id);
-      if(product){
-        product.quantityCart = product.quantityCart! - 1
+      if (product) {
+        product.quantityBuy = product.quantityBuy - 1
       }
-      
-      setCart(id, name, price, picture, quantityCart - 1)
+
+      setCart(id, name, price, picture, quantityBuy - 1, quantity)
       updateProductList('decrement')
     }
 
@@ -52,16 +51,16 @@ const Product = ({ id, name, price, picture, quantityCart}: ProductProps) => {
   const updateProductList = (actionType: string) => {
     let product = products.find((product) => product.id === id);
 
-    if(actionType === 'increment') {
-      product!.quantityCart = product!.quantityCart! + 1;
+    if (actionType === 'increment') {
+      product!.quantityBuy = product!.quantityBuy + 1;
       setProductInicial(products)
     } else {
-      product!.quantityCart = product!.quantityCart! - 1;
+      product!.quantityBuy = product!.quantityBuy - 1;
       setProductInicial(products)
     }
   }
 
-  const priceStyle = price.toLocaleString('pt-br' , { style: 'currency' , currency:'BRL'})
+  const priceStyle = price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
 
   return (
     <Wrapper>
@@ -75,7 +74,11 @@ const Product = ({ id, name, price, picture, quantityCart}: ProductProps) => {
         </Column>
 
         <WrapperIncrementor>
-          <Incrementor handleIncrement={handleIncrement} handleDecrement={handleDecrement} id={id} quantityCart={quantityCart!} />
+          <Incrementor
+            handleIncrement={handleIncrement}
+            handleDecrement={handleDecrement}
+            id={id}
+            quantityBuy={quantityBuy} />
         </WrapperIncrementor>
       </Info>
     </Wrapper>

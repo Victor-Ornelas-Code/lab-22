@@ -1,27 +1,25 @@
 import { Plus as PlusIcon } from "@styled-icons/boxicons-regular/Plus";
 import { Subtract as SubtractIcon } from "@styled-icons/remix-fill/Subtract";
 import { Wrapper, IconWrapper, Quantity } from "./styles";
-import create from 'zustand'
-import { constants } from "buffer";
-import { useCart } from "../../Data/data";
 
-type IncrementorProps = {
+
+type IncrementorType = {
   id: number;
-  quantityCart: number;
-  handleIncrement: (id: number, quantityCart: number) => void;
-  handleDecrement: (id: number, quantityCart: number) => void;
+  quantityBuy: number;
+  handleIncrement: (id: number, quantityBuy: number) => void;
+  handleDecrement: (id: number, quantityBuy: number) => void;
 };
 
-const Incrementor = ({ id, quantityCart, handleIncrement,  handleDecrement}: IncrementorProps) => {
+const Incrementor = ({ id, quantityBuy: quantityBuy, handleIncrement,  handleDecrement}: IncrementorType) => {
  
   return (
     <Wrapper>
       <IconWrapper>
-      <SubtractIcon onClick={() => handleDecrement(id, quantityCart)} aria-label="Subtract item" />
+      <SubtractIcon onClick={() => handleDecrement(id, quantityBuy)} aria-label="Subtract item" />
       </IconWrapper>
-      <Quantity>{quantityCart}</Quantity>
+      <Quantity>{quantityBuy}</Quantity>
       <IconWrapper>
-      <PlusIcon onClick={() => handleIncrement(id, quantityCart)} aria-label="Add item" />
+      <PlusIcon onClick={() => handleIncrement(id, quantityBuy)} aria-label="Add item" />
       </IconWrapper>
     </Wrapper>
   )
