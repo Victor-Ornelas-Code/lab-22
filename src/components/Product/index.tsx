@@ -13,12 +13,12 @@ export type ProductProps = {
 
 const Product = ({ id, name, price, picture, quantityBuy: quantityBuy }: ProductProps) => {
   const { cart, setCart } = useCart();
-  const { products, setProductList: setProductInicial } = useProducts();
+  const { products, setProductList } = useProducts();
 
   const handleIncrement = (quantityBuy: number, quantity: number) => {
     const product = products.find((product) => product.id === id);
     if (product!.quantity >= product!.quantityBuy + 1) {
-      if (cart.length > 0) {
+      if (cart.length >= 0) {
         const product = cart.find((item) => item.id === id)
 
         if (product) {
@@ -53,10 +53,10 @@ const Product = ({ id, name, price, picture, quantityBuy: quantityBuy }: Product
 
     if (actionType === 'increment') {
       product!.quantityBuy = product!.quantityBuy + 1;
-      setProductInicial(products)
+      setProductList(products)
     } else {
       product!.quantityBuy = product!.quantityBuy - 1;
-      setProductInicial(products)
+      setProductList(products)
     }
   }
 

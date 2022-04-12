@@ -2,17 +2,31 @@
   "products": [
     {
       "id": 1,
-      "name": "Product 1",
+      "name": "iphone-12",
       "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
       "quantity": 2,
-      "price": 299.50
+      "price": 2990.50
     },
     {
       "id": 2,
-      "name": "Product 2",
-      "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
-      "quantity": 10,
-      "price": 299.50
+      "name": "Echo Dot",
+      "picture": "https://m.media-amazon.com/images/I/51SYrUFOIVL._AC_SL1000_.jpg",
+      "quantity": 7,
+      "price": 331.55
+    },
+    {
+      "id": 3,
+      "name": "kindle",
+      "picture": "https://m.media-amazon.com/images/I/51ij0YhqZTS._AC_SL1000_.jpg",
+      "quantity": 1,
+      "price": 379.05
+    },
+    {
+      "id": 4,
+      "name": "iPad Pro",
+      "picture": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-pro-12-11-select-202104_GEO_BR?wid=545&hei=550&fmt=jpeg&qlt=95&.v=1617864717000",
+      "quantity": 5,
+      "price": 14240.00
     }
   ]
 }
